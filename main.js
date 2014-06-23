@@ -1,29 +1,29 @@
-function getTime(){
-  var today = new Date();
-	var hours = today.getHours();
-	var minutes = today.getMinutes();
-  var seconds = today.getSeconds();
-  
-  hours   = (hours >= 10)   ? String(hours)   : "0" + String(hours);
-	minutes = (minutes >= 10) ? String(minutes) : "0" + String(minutes);
-	seconds = (seconds >= 10) ? String(seconds) : "0" + String(seconds);
-	return hours + minutes + seconds;
-}
-
-function lengthTwo(inputHex){
-  if (inputHex.length != 2 ){
-    return "0" + inputHex;
+function lengthTwo(inputString){
+  if (inputString.length != 2 ){
+    return "0" + inputString;
   }
   else {
-    return inputHex;
+    return inputString;
   }
+}
+
+function getTime(){
+   var today = new Date();
+	var hours = today.getHours();
+	var minutes = today.getMinutes();
+   var seconds = today.getSeconds();
+  
+   hours   = lengthTwo( String(hours)  );
+	minutes = lengthTwo( String(minutes));
+	seconds = lengthTwo( String(seconds));
+	return hours + minutes + seconds;
 }
 
 function normalizeTime(timestring){
   var redcolor = Number(timestring.substring(0,2));
   var greencolor = Number(timestring.substring(2,4));
   var bluecolor = Number(timestring.substring(4,6));
-  //Since the time ranges are 0-24, 0-60, 0-60 lets normalizze them to fill the color range 0-255
+  //Since the time ranges are 0-24, 0-60, 0-60 lets normalize them to fill the color range 0-255
   var redHex   = Math.round( redcolor   * (255/24)).toString(16);
   var greenHex = Math.round( greencolor * (255/60)).toString(16);
   var blueHex  = Math.round( bluecolor  * (255/60)).toString(16);
@@ -32,7 +32,7 @@ function normalizeTime(timestring){
   redHex   = lengthTwo(redHex);
   greenHex = lengthTwo(greenHex);
   blueHex  = lengthTwo(blueHex);
-  return  redHex + greenHex + blueHex; 
+  return redHex + greenHex + blueHex; 
 }
 
 function getCompliment(inputHex){
